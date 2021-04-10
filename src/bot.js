@@ -61,13 +61,13 @@ client.on('message', (message) => {
     if (cmd_name === 'game') {
         const initial_time = Number(args[0]) || 5;
         const increment = Number(args[1]) || 0;
-        lichess.startGame(initial_time, increment);
+        startGame(initial_time, increment);
     }
 
     if (cmd_name === 'crosstable') {
         const user1 = String(args[0]);
         const user2 = String(args[1]);
-        lichess.crossTable(user1, user2);
+        crossTable(user1, user2);
     }
 });
 
