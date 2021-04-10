@@ -33,6 +33,12 @@ client.on('message', (message) => {
         const increment = Number(args[1]) || 0;
         lichess.startGame(initial_time, increment);
     }
+
+    if (cmd_name === 'crosstable') {
+        const user1 = String(args[0]);
+        const user2 = String(args[1]);
+        lichess.crossTable(user1, user2);
+    }
 });
 
 client.login(process.env.DISCORDJS_BOT_TOKEN);
