@@ -39,7 +39,11 @@ client.on('message', (message) => {
         axios
             .get(`https://lichess.org/api/crosstable/${user1}/${user2}`)
             .then((res) => {
-                message.channel.send(`${JSON.stringify(res.data.users)}`);
+                message.channel.send(
+                    `${JSON.stringify(res.data.users.user1)}\n${JSON.stringify(
+                        res.data.users.user2
+                    )}`
+                );
             })
             .catch((error) => {
                 console.error(error);
@@ -54,7 +58,9 @@ client.on('message', (message) => {
 
     // Help
     if (cmd_name === 'help') {
-        message.channel.send('```Try !game```');
+        message.channel.send(
+            '```Try:\n!game [time(min)] [inc(sec)]\n!crosstable [user1] [user2]```'
+        );
     }
 
     // Lichess
