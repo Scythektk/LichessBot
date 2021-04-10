@@ -39,7 +39,7 @@ client.on('message', (message) => {
         axios
             .get(`https://lichess.org/api/crosstable/${user1}/${user2}`)
             .then((res) => {
-                message.channel.send(`${JSON.Stringify(res.data.users)}`);
+                message.channel.send(`${JSON.stringify(res.data.users)}`);
             })
             .catch((error) => {
                 console.error(error);
