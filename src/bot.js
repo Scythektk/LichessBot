@@ -2,8 +2,7 @@ require('dotenv').config();
 const axios = require('axios');
 const { Client } = require('discord.js');
 const client = new Client();
-
-const lichess = require('./lichess');
+// FIXME: create ./lichess
 
 // !
 const PREFIX = '!';
