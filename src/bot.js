@@ -2,7 +2,10 @@ require('dotenv').config();
 const axios = require('axios');
 const { Client } = require('discord.js');
 const client = new Client();
-// FIXME: create ./lichess
+
+// ! Chess.com
+var ChessWebAPI = require('chess-web-api');
+var chessAPI = new ChessWebAPI();
 
 // !
 const PREFIX = '!';
@@ -14,7 +17,7 @@ client.on('ready', () => {
 });
 
 client.on('message', (message) => {
-    // Lichess
+    // ! Lichess
     function startGame(limit, clock_increment) {
         axios
             .post('https://lichess.org/api/challenge/open', {
@@ -49,6 +52,23 @@ client.on('message', (message) => {
                 console.error(error);
             });
     }
+    // !
+
+    // ! Chess.com
+    function chesscomratings(user1) {
+        chessAPI.getPlayerStats('ktkpositronic').then(
+            function (res) {
+                req_res = res.body;
+                message.channel.send(
+                    `Chess.com ratings for ${user1}:\nBullet: ${req_res.chess_bullet.last.rating}\nBlitz: ${req_res.chess_blitz.last.rating}\nRapid: ${req_res.chess_rapid.last.rating}\n`
+                );
+            },
+            function (err) {
+                console.error(err);
+            }
+        );
+    }
+
     if (!message.content.startsWith(PREFIX) || message.author.bot) return;
 
     const [cmd_name, ...args] = message.content
@@ -56,14 +76,15 @@ client.on('message', (message) => {
         .substring(PREFIX.length)
         .split(/\s+/);
 
-    // Help
+    // ! Help
     if (cmd_name === 'help') {
         message.channel.send(
             '```Try:\n!game [time(min)] [inc(sec)]\n!crosstable [user1] [user2]```'
         );
     }
+    // !
 
-    // Lichess
+    // ! Lichess
     if (cmd_name === 'game') {
         const initial_time = Number(args[0]) || 5;
         const increment = Number(args[1]) || 0;
@@ -75,6 +96,14 @@ client.on('message', (message) => {
         const user2 = String(args[1]);
         crossTable(user1, user2);
     }
+    // !
+
+    // ! Chess.com
+    if (cmd_name === 'rating') {
+        const user1 = String(args[0]) || 'ktkpositronic';
+        chesscomratings(user1);
+    }
+    // !
 });
 
 client.login(process.env.DISCORDJS_BOT_TOKEN);

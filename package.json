@@ -12,6 +12,7 @@
     "license": "ISC",
     "dependencies": {
         "axios": "^0.21.0",
+        "chess-web-api": "^1.1.0",
         "discord.js": "^12.5.1",
         "dotenv": "^8.2.0"
     }
