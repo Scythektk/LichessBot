@@ -56,7 +56,7 @@ client.on('message', (message) => {
 
     // ! Chess.com
     function chesscomratings(user1) {
-        chessAPI.getPlayerStats('ktkpositronic').then(
+        chessAPI.getPlayerStats(user1).then(
             function (res) {
                 req_res = res.body;
                 message.channel.send(
