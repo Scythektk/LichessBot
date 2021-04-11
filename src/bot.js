@@ -57,7 +57,7 @@ client.on('message', (message) => {
     // ! Chess.com
     function chesscomratings(user1) {
         chessAPI.getPlayerStats(user1).then(
-            function (res) {
+            (res) => {
                 req_res = res.body;
                 message.channel.send(
                     `Chess.com ratings for ${user1}:\nBullet: ${req_res.chess_bullet.last.rating}\nBlitz: ${req_res.chess_blitz.last.rating}\nRapid: ${req_res.chess_rapid.last.rating}\n`
@@ -79,7 +79,7 @@ client.on('message', (message) => {
     // ! Help
     if (cmd_name === 'help') {
         message.channel.send(
-            '```Try:\n!game [time(min)] [inc(sec)]\n!crosstable [user1] [user2]```'
+            '```Try:\n!game [time(min)] [inc(sec)]\n!crosstable [user1] [user2]\n!rating [chesscom userid]```'
         );
     }
     // !
